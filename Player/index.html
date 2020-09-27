@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- Aplayer CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css" />
+
+
+    <title>Online music streaming website</title>
+
+    <style>
+        body {
+
+            background-color: #0f0f0f;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: #ffffff;
+        }
+
+        img {
+            width: 100%;
+            min-height: 250px;
+        }
+
+        .main {
+            padding: 40px 0;
+        }
+
+        .col-md-3 {
+            margin-bottom: 40px;
+        }
+
+        .album-poster {
+            position: relative;
+            display: block;
+            border-radius: 7px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px #5b4b76;
+            transition: all ease 0.4s;
+
+        }
+
+        .album-poster:hover {
+            box-shadow: none;
+            transform: scale(0.98) translateY(5px);
+        }
+
+        h3 {
+            font-size: 34px;
+            margin-bottom: 34px;
+            border-bottom: 4px double #e6e6e6;
+            padding-bottom: 15px;
+
+        }
+
+        p {
+            font-size: 15px;
+
+        }
+
+        h4 {
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-top: 15px;
+            font-weight: 700;
+        }
+
+
+
+        /*default is hide music player*/
+        #aplayer {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            box-shadow: 0 -2px 2px #dada;
+            background-color: #fff;
+            transition: all ease 0.5s;
+        }
+
+        #aplayer.showPlayer {
+
+            bottom: 0;
+        }
+
+
+        /*music player customizing style*/
+
+        span {
+            color: rgb(0, 0, 0) !important;
+            font-size: 16px;
+        }
+
+        .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-loaded {
+
+            background: #e0eeee;
+            height: 4px;
+        }
+
+        .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played {
+            height: 4px;
+            background-color: #000000 !important;
+        }
+
+        .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played .aplayer-thumb {
+
+            background-color: #000000 !important;
+        }
+
+        .aplayer .aplayer-icon {
+
+            width: 20px;
+            height: 20px;
+        }
+
+        .aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path {
+
+            fill: #000;
+        }
+
+        .aplayer .aplayer-info .aplayer-music {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+
+    <!--Carousel-->
+
+    <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="c1.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="c15.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="c6.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <!--Alert!-->
+
+    <div class="alert alert-dark alert-dismissible fade show" role="alert">
+        <strong>BLACKPINK In Your Area!</strong> Make Sure to check out Blackpink's new album on 2nd October.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <!--Introduction-->
+
+    <div class="container">
+        <div class="jumbotron-style background-color-dark">
+            <h5 class="display-4">Hello!</h5>
+            <p class="lead">This is an online music streaming website consisting of some of my favourite and latest
+                K-Pop(Korean Pop) Songs.
+                You just have to click the icon and enjoy the music.
+                Down there I have mentioned some of the most likable and popular groups with their spotify links
+                attached. Do give it a try if you find this interesting. <svg width="1em" height="1em"
+                    viewBox="0 0 16 16" class="bi bi-emoji-smile" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path fill-rule="evenodd"
+                        d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683z" />
+                    <path
+                        d="M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
+                </svg>
+                Hope you enjoy it <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-suit-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+                  </svg>
+            </p>
+
+
+        </div>
+    </div>
+
+
+
+
+    <div class="main">
+
+
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <h3> <strong>K-Pop Favourites</strong>
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-headphones" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M8 3a5 5 0 0 0-5 5v4.5H2V8a6 6 0 1 1 12 0v4.5h-1V8a5 5 0 0 0-5-5z" />
+                            <path
+                                d="M11 10a1 1 0 0 1 1-1h2v4a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3zm-6 0a1 1 0 0 0-1-1H2v4a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3z" />
+                        </svg>
+                    </h3>
+
+                </div>
+
+                <div class="col-md-3">
+                    <a href="javascript:void();" class="album-poster" data-switch="0">
+                        <img src="https://engtranslations.com/wp-content/uploads/2020/08/Ice-Cream.jpg" alt="">
+                    </a>
+                    <h4>Ice Cream</h4>
+                    <p>BLACKPINK ft. Selena Gomez</p>
+                </div>
+                <div class="col-md-3">
+                    <a href="javascript:void();" class="album-poster" data-switch="1">
+                        <img src="https://kgasa.com/wp-content/uploads/2020/08/BTS-Dynamite.jpg" alt="">
+                    </a>
+                    <h4>Dynamite</h4>
+                    <p>BTS</p>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="javascript:void();" class="album-poster" data-switch="2">
+                        <img src="https://aphrodite.gmanetwork.com/entertainment/gallery/900_675_main__20200618165349.jpg"
+                            alt="">
+                    </a>
+                    <h4>How You Like That</h4>
+                    <p>BLACKPINK</p>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="javascript:void();" class="album-poster" data-switch="3">
+                        <img src="https://www.hellokpop.com/wp-content/uploads/2020/06/8B20ECA6-23EE-4964-A6FC-4F12C52D1BB1.jpeg"
+                            alt="">
+                    </a>
+                    <h4>Maria</h4>
+                    <p>HWASA</p>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="javascript:void();" class="album-poster" data-switch="4">
+                        <img src="https://i1.wp.com/blackpinkupdate.com/wp-content/uploads/2018/10/cover-BLACKPINK-Jennie-Solo-Song-Debut-November-12.jpg?fit=730%2C835&ssl=1"
+                            alt="">
+                    </a>
+                    <h4>SOLO</h4>
+                    <p>JENNIE</p>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="javascript:void();" class="album-poster" data-switch="5">
+                        <img src="https://image.kpopmap.com/2019/12/red-velvet-psycho.jpg" alt="">
+                    </a>
+                    <h4>Psycho</h4>
+                    <p>RED VELVET</p>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="javascript:void();" class="album-poster" data-switch="6">
+                        <img src="https://i.ytimg.com/vi/wS7Zikb4BmU/maxresdefault.jpg" alt="">
+                    </a>
+                    <h4>Spring Day</h4>
+                    <p>BTS</p>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="javascript:void();" class="album-poster" data-switch="7">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Seventeen_-_Director%27s_Cut.jpg/220px-Seventeen_-_Director%27s_Cut.jpg"
+                            alt="">
+                    </a>
+                    <h4>Thanks</h4>
+                    <p>SEVENTEEN</p>
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+
+
+            <!--recommendations-->
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h3><strong>Recommendations </strong><svg width="1em" height="1em" viewBox="0 0 16 16"
+                            class="bi bi-bookmark-heart" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            <path fill-rule="evenodd"
+                                d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
+                        </svg></h3>
+                </div>
+                <div class="col-md-3">
+                    <a href="https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX" class="album-poster">
+                        <img src="D11.jpg" alt="">
+                    </a>
+                    <h4>BTS</h4>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="https://open.spotify.com/artist/41MozSoPIsD1dJM0CLPjZF" class="album-poster">
+                        <img src="d22.jpg" alt="">
+                    </a>
+                    <h4>BLACKPINK</h4>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="https://open.spotify.com/artist/7n2Ycct7Beij7Dj7meI4X0" class="album-poster">
+                        <img src="d33.jpg" alt="">
+                    </a>
+                    <h4>TWICE</h4>
+                </div>
+
+
+
+                <div class="col-md-3">
+                    <a href="https://open.spotify.com/artist/3cjEqqelV9zb4BYE3qDQ4O" class="album-poster">
+                        <img src="d44.jpg" alt="">
+                    </a>
+                    <h4>EXO</h4>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="container">
+        <div class="text-center">
+            <p class="float-right"><a href="index.html">Back to top <svg width="1em" height="1em" viewBox="0 0 16 16"
+                        class="bi bi-chevron-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                    </svg></a></p>
+            <p>© 2020-2021 Shatakshi· All Rights Reserved. </p>
+
+
+        </div>
+    </footer>
+
+    <div id="aplayer"></div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
+    <!--APlayer JQuery link-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
+
+    <!--APlayer Plugin-->
+    <script>
+
+        /*NOW I CLICK album-poster TO GET CURRENT SONG ID*/
+
+        $(".album-poster").on('click', function (e) {
+            var dataSwitchId = $(this).attr('data-switch');
+            //console.log(dataSwitchId);
+
+            //aplayer switch function
+            ap.list.switch(dataSwitchId); //static id but used dynamic
+
+            //aplayer play function
+            //click to play song album-poster itself
+
+            ap.play();
+
+            //click to slideup player
+            $("#aplayer").addClass('showPlayer');
+        });
+
+        const ap = new APlayer({
+            container: document.getElementById('aplayer'),
+            listFolded: true,
+            audio: [
+
+                {
+                    name: 'Ice Cream',
+                    artist: 'BLACKPINK feat. Selena Gomez',
+                    url: 'song/naijacrawl-music-blackpink-ft-selena-gomez-ice-cream.mp3',
+                    cover: 'https://engtranslations.com/wp-content/uploads/2020/08/Ice-Cream.jpg'
+                },
+
+                {
+                    name: 'Dynamite',
+                    artist: 'BTS',
+                    url: 'song/BTS_-_Dynamite.mp3',
+                    cover: 'https://kgasa.com/wp-content/uploads/2020/08/BTS-Dynamite.jpg'
+                },
+
+
+
+                {
+                    name: 'How You Like That',
+                    artist: 'BLACKPINK',
+                    url: 'song/01. How You Like That.mp3',
+                    cover: 'https://images.genius.com/c3e3acad7396a7e99ca0df1c897e955c.1000x1000x1.png'
+                },
+
+                {
+                    name: 'Maria',
+                    artist: 'HWASA',
+                    url: 'song/Maria-hwa-sa-maria-(matikiri.wapkiz.com).mp3',
+                    cover: 'https://www.hellokpop.com/wp-content/uploads/2020/06/8B20ECA6-23EE-4964-A6FC-4F12C52D1BB1.jpeg'
+                },
+
+                {
+                    name: 'SOLO',
+                    artist: 'JENNIE',
+                    url: 'song/JENNIE_(BLACKPINK)_-_SOLO_(Easy_Lyrics)(128k).mp3',
+                    cover: 'https://i0.wp.com/blackpinkupdate.com/wp-content/uploads/2018/11/coverfix-BLACKPINK-Jennie-SOLO-Teaser-3.jpg?fit=730%2C835&ssl=1'
+                },
+
+                {
+                    name: 'Psycho',
+                    artist: 'RED VELVET',
+                    url: 'song/Red Velvet - Psycho [128 kbps].mp3',
+                    cover: 'https://www.tagar.id/Asset/uploads2019/1577131985199-red-velvet.jpg'
+                },
+
+                {
+                    name: 'Spring Day',
+                    artist: 'BTS',
+                    url: 'song/BTS - 봄날 (Spring Day) [129 kbps].mp3',
+                    cover: 'https://i.ytimg.com/vi/fqmSO7X8sS4/maxresdefault.jpg'
+                },
+
+                {
+                    name: 'Thanks',
+                    artist: 'SEVENTEEN',
+                    url: 'song/Thanks.mp3',
+                    cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Seventeen_-_Director%27s_Cut.jpg/220px-Seventeen_-_Director%27s_Cut.jpg'
+                }
+
+
+            ]
+        });
+    </script>
+</body>
+
+</html>
